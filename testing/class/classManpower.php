@@ -14,8 +14,12 @@ class Manpower {
     // 1. Untuk tambah data manpower
     public function tambahManpower($nama_karyawan, $nik, $departemen) {
         try {
-            $sqltambahmanpower = "INSERT INTO manpower (nama_karyawan, nik, departemen) VALUES (:nama_karyawan, :nik, :departemen)";
+            // Karena id_manpower-nya selalu 0
+            $id_manpower = 0;
+
+            $sqltambahmanpower = "INSERT INTO manpower (id_manpower, nama_karyawan, nik, departemen) VALUES (:id_manpower, :nama_karyawan, :nik, :departemen)";
             $tambahdatamanpower = $this->conn->prepare($sqltambahmanpower);
+            $tambahdatamanpower->bindParam(':id_manpower', $id_manpower);
             $tambahdatamanpower->bindParam(':nama_karyawan', $nama_karyawan);
             $tambahdatamanpower->bindParam(':nik', $nik);
             $tambahdatamanpower->bindParam(':departemen', $departemen);
